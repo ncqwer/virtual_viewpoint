@@ -1,6 +1,7 @@
-aux_source_directory(src_file .)
 
-add_library(help_func ${src_file} STATIC)
+
+add_library(help_func STATIC help_func.cpp )
+target_link_libraries(help_func ${OpenCV_LIBS})
 
 install(TARGETS help_func
 		RUNTIME DESTINATION bin
