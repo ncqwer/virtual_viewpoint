@@ -50,18 +50,18 @@ int main(int argc, char const *argv[])
 	//also we should smooth it
 	Mat disp_l;
 	Mat disp_temp_l;
-	// Mat disp_show;
+	Mat disp_show;
 	sgbm(imgl,imgr,disp_temp_l);
 	disp_temp_l.convertTo(disp_l, CV_32FC1, 1.0/16);
-	// disp_l.convertTo(disp_show, CV_8U, 255.0/number_of_disparities);
-	// namedWindow("origin disparity",WINDOW_NORMAL);
-	// imshow("origin disparity", disp_show);
+	disp_l.convertTo(disp_show, CV_8U, 255.0/number_of_disparities);
+	namedWindow("origin disparity",WINDOW_NORMAL);
+	imshow("origin disparity", disp_show);
 	//waitKey();
 
 	fixDisparity(disp_l, number_of_disparities);
-	// disp_l.convertTo(disp_show, CV_8U, 255.0/number_of_disparities);
-	// namedWindow("fixed disparity",WINDOW_NORMAL);
-	// imshow("fixed disparity", disp_show);
+	disp_l.convertTo(disp_show, CV_8U, 255.0/number_of_disparities);
+	namedWindow("fixed disparity",WINDOW_NORMAL);
+	imshow("fixed disparity", disp_show);
 	// waitKey();
 	//we need to know f,and we can set 1 to b
 	//=============
@@ -72,8 +72,8 @@ int main(int argc, char const *argv[])
 	//left-middle disparties and middle-right disparties is d/2
 	Mat disp_use = disp_l/2;
 	Mat img_ml(imgl.rows,imgl.cols,CV_8UC3);
-    // reprojection_inverse(imgl,disp_use,img_ml,true);
-    reprojection_direct(imgl,disp_use,img_ml,true);
+    reprojection_inverse(imgl,disp_use,img_ml,true,number_of_disparities);
+    // reprojection_direct(imgl,disp_use,img_ml,true);
 	// int cn_disp = disp_use.channels();
 	// for ( int j = 0; j < imgl.rows; j++ )
  //    {
@@ -145,8 +145,8 @@ int main(int argc, char const *argv[])
  //        }
  //    }
     Mat img_mr(imgr.rows,imgr.cols,CV_8UC3);
-    // reprojection_inverse(imgr,disp_use,img_mr,true);
-    reprojection_direct(imgr,disp_use,img_mr,true);
+    reprojection_inverse(imgr,disp_use,img_mr,false,number_of_disparities);
+    // reprojection_direct(imgr,disp_use,img_mr,false);
     // for ( int j = 0; j < img_mr.rows; j++ )
     // {
     //     uchar* p_l = imgr.ptr<uchar>(j);

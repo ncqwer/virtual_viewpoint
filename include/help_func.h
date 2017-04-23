@@ -9,7 +9,8 @@ void fixDisparity(cv::Mat& disp, int numberOfDisparities);
 void reprojection_inverse(const cv::Mat& src,
                   const cv::Mat& disp,
                   cv::Mat& dst,
-                  bool toright);
+                  bool toright,
+                  int nod);
 
 void reprojection_direct(const cv::Mat& src,
                   const cv::Mat& disp,
