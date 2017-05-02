@@ -4,7 +4,8 @@
 
 #include <opencv2/opencv.hpp>
 
-void fixDisparity(cv::Mat& disp, int numberOfDisparities);
+void fixDisparity_l(cv::Mat& disp, int numberOfDisparities);
+void fixDisparity_r(cv::Mat& disp, int numberOfDisparities);
 
 void reprojection_inverse(const cv::Mat& src,
                   const cv::Mat& disp,
@@ -14,6 +15,5 @@ void reprojection_inverse(const cv::Mat& src,
 
 void reprojection_direct(const cv::Mat& src,
                   const cv::Mat& disp,
-                  cv::Mat& dst,
-                  bool to_right);
+                  cv::Mat& dst);
 #endif
